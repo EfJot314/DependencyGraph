@@ -12,7 +12,6 @@ class Graph{
     public:
         Graph();
         Graph(int nOfVertices);
-        Graph(int** matrix, int nOfVertices);
         ~Graph();
         int getNoVertices();
         void addEdge(int v1, int v2);
@@ -27,6 +26,6 @@ class GraphVisualizer{
         GraphVisualizer();
         GraphVisualizer(Graph g);
         ~GraphVisualizer();
-
+        void showGraph();
 };
 
