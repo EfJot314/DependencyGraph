@@ -15,16 +15,35 @@ void GraphVisualizer::showGraph(){
     //variable for handling events
     sf::Event event;
 
+    //loading font
+    sf::Font font;
+    font.loadFromFile("SFML/myFont.ttf");
+
     //creating objects to display
-    //vertices -> circles
+    //vertices
     int nOfVertices = g.getNoVertices();
     Vertex** vertices = (Vertex**)calloc(nOfVertices, sizeof(Vertex*));
     for(int i=0;i<nOfVertices;i++){
         vertices[i] = new Vertex(100, 100, i+1);
     }
+    //edges
+    //TODO
+
+
+    //creating variable which is storing id of vertex to move
+    int movingVertex = -1;
+
+    //mouse position
+    int mouseX = sf::Mouse::getPosition(*window).x;
+    int mouseY = sf::Mouse::getPosition(*window).y;
 
     //main loop
     while(window->isOpen()){
+        //get mouse position
+        mouseX = sf::Mouse::getPosition(*window).x;
+        mouseY = sf::Mouse::getPosition(*window).y;
+
+
         //background color
         window->clear(sf::Color::White);
 
@@ -37,11 +56,34 @@ void GraphVisualizer::showGraph(){
         window->display();
 
         //event handling
-        while (window->pollEvent(event)) {
+        while(window->pollEvent(event)) {
             //closing window
-            if (event.type == sf::Event::Closed) {
+            if(event.type == sf::Event::Closed) {
                 window->close();
             }
+            //mouse pressed
+            else if(event.type == sf::Event::MouseButtonPressed){
+                //left button
+                if(event.mouseButton.button == sf::Mouse::Left){
+                    //get first vertex which is under mouse
+                    for(int i=nOfVertices-1;i>=0;i--){
+                        if(vertices[i]->isOverVertex(mouseX, mouseY)){
+                            movingVertex = i;
+                            break;
+                        }
+                    }
+                }
+            }
+            //mouse released
+            else if(event.type == sf::Event::MouseButtonReleased){
+                //stop moving vertex
+                movingVertex = -1;
+            }
+        }
+
+        //if mouse left button in pressed
+        if(movingVertex >= 0){
+            vertices[movingVertex]->setPosition(mouseX, mouseY);
         }
     }
 

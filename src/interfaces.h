@@ -26,6 +26,8 @@ class Vertex{
         int id;
         float r;
         sf::CircleShape* circle;
+        sf::Font font;
+        sf::Text* text;
     public:
         Vertex();
         Vertex(int id);
@@ -34,6 +36,7 @@ class Vertex{
         void addToWindow(sf::RenderWindow* window);
         void setPosition(int x, int y);
         int getId();
+        bool isOverVertex(int xi, int yi);
 };
 
 class GraphVisualizer{
