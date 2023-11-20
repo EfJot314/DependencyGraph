@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <math.h>
+#include <sstream>
 
 #include "constants.h"
 
@@ -30,7 +31,7 @@ struct Relations{
 class Graph{
     private:
         int** matrix;
-        std::string* names;
+        char* names;
         int nOfVertices;
         int nOfEdges;
     public:
@@ -42,7 +43,7 @@ class Graph{
         void addEdge(int v1, int v2);
         void removeEdge(int v1, int v2);
         bool edgeExist(int v1, int v2);
-        void setVertexName(int id, std::string name);
+        void setVertexName(int id, char name);
         std::string getName(int id);
 
 };

@@ -7,7 +7,7 @@ Graph::Graph(int nOfVertices){
     this->nOfEdges = 0;
 
     matrix = (int**)calloc(nOfVertices, sizeof(int*));
-    names = (std::string*)calloc(nOfVertices, sizeof(std::string));
+    names = (char*)calloc(nOfVertices, sizeof(char));
     for(int i=0;i<nOfVertices;i++){
         matrix[i] = (int*)calloc(nOfVertices, sizeof(int));
     }
@@ -57,7 +57,7 @@ bool Graph::edgeExist(int v1, int v2){
     return matrix[v1][v2] == 1;
 };
 
-void Graph::setVertexName(int id, std::string name){
+void Graph::setVertexName(int id, char name){
     //validation
     if(id < 0 || id >= nOfVertices)
         return;
@@ -66,10 +66,12 @@ void Graph::setVertexName(int id, std::string name){
 }
 
 std::string Graph::getName(int id){
-    if(id < 0 || id >= nOfVertices || names[id].empty())
+    if(id < 0 || id >= nOfVertices)
         return std::to_string(id+1);
     //returning result
-    return names[id];
+    std::stringstream ss;
+    ss << names[id];
+    return ss.str();
 }
 
 

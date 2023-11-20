@@ -53,19 +53,10 @@ int main()
 
 
     //create graph
-    // Graph* g = s.createGraph();
-
-    
-    //create example graph
-    Graph g(4);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 3);
-
+    Graph* g = s.createGraph();
 
     //graph visualization
-    GraphVisualizer gv(g);
+    GraphVisualizer gv(*g);
     gv.showGraph();
 
     return 0;

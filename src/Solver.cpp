@@ -101,5 +101,17 @@ Relations* Solver::createIndependecies(){
 
 
 Graph* Solver::createGraph(){
-
+    Graph* g = new Graph(word.length());
+    //for every letter in word...
+    int counter = 0;
+    for(char c : word){
+        //...search for action which has id equal to c
+        for(int i=0;i<ip.getNoActions();i++){
+            if(ip.getAction(i).id == c){
+                g->setVertexName(counter, c);
+                counter++;
+            }
+        }
+    }
+    return g;
 };
