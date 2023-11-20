@@ -100,16 +100,27 @@ Relations* Solver::createIndependecies(){
 };
 
 
-Graph* Solver::createGraph(){
+Graph* Solver::createGraph(Relations* D){
     Graph* g = new Graph(word.length());
     //for every letter in word...
     int counter = 0;
-    for(char c : word){
+    for(int i=0;i<word.length();i++){
+        char c = word[i];
         //...search for action which has id equal to c
-        for(int i=0;i<ip.getNoActions();i++){
-            if(ip.getAction(i).id == c){
-                g->setVertexName(counter, c);
+        for(int j=0;j<ip.getNoActions();j++){
+            if(ip.getAction(j).id == c){
+                g->setVertexName(i, c);
                 counter++;
+                //search for edges
+                for(int z=0;z<i;z++){
+                    //add edge only then, when it is in dependency array
+                    for(int x=0;x<D->length;x++){
+                        if(D->tab[x].e1 == c && D->tab[x].e2 == word[z]){
+                            g->addEdge(z, i);
+                            break;
+                        }
+                    }
+                }
             }
         }
     }

@@ -53,7 +53,7 @@ int main()
 
 
     //create graph
-    Graph* g = s.createGraph();
+    Graph* g = s.createGraph(D);
 
     //graph visualization
     GraphVisualizer gv(*g);

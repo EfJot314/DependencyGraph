@@ -45,7 +45,6 @@ class Graph{
         bool edgeExist(int v1, int v2);
         void setVertexName(int id, char name);
         std::string getName(int id);
-
 };
 
 class Vertex{
@@ -116,7 +115,7 @@ class Solver{
         ~Solver();
         Relations* createDependencies();
         Relations* createIndependecies();
-        Graph* createGraph();
+        Graph* createGraph(Relations* D);
 
 };
 
