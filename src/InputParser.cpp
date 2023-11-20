@@ -8,6 +8,10 @@ InputParser::InputParser(){
 
 InputParser::~InputParser(){};
 
+void InputParser::freeMemory(){
+    free(actions);
+};
+
 void InputParser::parse(std::string line){
     //remove all what is not a letter
     std::string newLine = "";

@@ -110,4 +110,8 @@ void GraphVisualizer::showGraph(){
         }
     }
 
+    //free memory
+    free(edges);
+    free(vertices);
+
 };

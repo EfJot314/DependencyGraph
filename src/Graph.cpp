@@ -16,6 +16,14 @@ Graph::Graph(int nOfVertices){
 
 Graph::~Graph(){};
 
+void Graph::freeMemory(){
+    free(names);
+    for(int i=0;i<nOfVertices;i++){
+        free(matrix[i]);
+    }
+    free(matrix);
+};
+
 int Graph::getNoVertices(){
     return nOfVertices;
 };
@@ -63,7 +71,7 @@ void Graph::setVertexName(int id, char name){
         return;
     //if everything is ok, then set name
     names[id] = name;
-}
+};
 
 std::string Graph::getName(int id){
     if(id < 0 || id >= nOfVertices)
@@ -72,7 +80,7 @@ std::string Graph::getName(int id){
     std::stringstream ss;
     ss << names[id];
     return ss.str();
-}
+};
 
 
 

@@ -44,6 +44,7 @@ class Graph{
         bool edgeExist(int v1, int v2);
         void setVertexName(int id, char name);
         std::string getName(int id);
+        void freeMemory();
 };
 
 class Vertex{
@@ -102,6 +103,7 @@ class InputParser{
         void parse(std::string line);
         int getNoActions();
         Action getAction(int id);
+        void freeMemory();
 };
 
 class Solver{

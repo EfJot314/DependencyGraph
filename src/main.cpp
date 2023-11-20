@@ -64,5 +64,10 @@ int main()
     GraphVisualizer gv(*g);
     gv.showGraph();
 
+    //free memory
+    g->freeMemory();
+    ip.freeMemory();
+
+    
     return 0;
 }
