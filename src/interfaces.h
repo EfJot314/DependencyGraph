@@ -66,3 +66,17 @@ class GraphVisualizer{
         void showGraph();
 };
 
+
+class InputParser{
+    private:
+        int n;
+    public:
+        InputParser();
+        InputParser(int n);
+        ~InputParser();
+        void parse(std::string line);
+
+};
+
+
+
