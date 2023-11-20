@@ -19,6 +19,23 @@ class Graph{
         bool edgeExist(int v1, int v2);
 };
 
+class Vertex{
+    private:
+        int x;
+        int y;
+        int id;
+        float r;
+        sf::CircleShape* circle;
+    public:
+        Vertex();
+        Vertex(int id);
+        Vertex(int x, int y, int id);
+        ~Vertex();
+        void addToWindow(sf::RenderWindow* window);
+        void setPosition(int x, int y);
+        int getId();
+};
+
 class GraphVisualizer{
     private:
         Graph g;
