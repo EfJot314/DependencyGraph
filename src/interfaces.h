@@ -9,11 +9,13 @@ class Graph{
     private:
         int** matrix;
         int nOfVertices;
+        int nOfEdges;
     public:
         Graph();
         Graph(int nOfVertices);
         ~Graph();
         int getNoVertices();
+        int getNoEdges();
         void addEdge(int v1, int v2);
         void removeEdge(int v1, int v2);
         bool edgeExist(int v1, int v2);
@@ -36,7 +38,22 @@ class Vertex{
         void addToWindow(sf::RenderWindow* window);
         void setPosition(int x, int y);
         int getId();
+        int getPositionX();
+        int getPositionY();
         bool isOverVertex(int xi, int yi);
+};
+
+class Edge{
+    private:
+        Vertex* v1;
+        Vertex* v2;
+        sf::VertexArray* line;
+    public:
+        Edge();
+        Edge(Vertex* v1, Vertex* v2);
+        ~Edge();
+        void addToWindow(sf::RenderWindow* window);
+        void updatePosition();
 };
 
 class GraphVisualizer{

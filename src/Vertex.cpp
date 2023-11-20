@@ -40,6 +40,14 @@ void Vertex::setPosition(int x, int y){
     this->y = y;
 };
 
+int Vertex::getPositionX(){
+    return x;
+};
+
+int Vertex::getPositionY(){
+    return y;
+};
+
 int Vertex::getId(){
     return id;
 };

@@ -4,6 +4,7 @@ Graph::Graph(){};
 
 Graph::Graph(int nOfVertices){
     this->nOfVertices = nOfVertices;
+    this->nOfEdges = 0;
 
     matrix = (int**)calloc(nOfVertices, sizeof(int*));
     for(int i=0;i<nOfVertices;i++){
@@ -17,6 +18,10 @@ int Graph::getNoVertices(){
     return nOfVertices;
 };
 
+int Graph::getNoEdges(){
+    return nOfEdges;
+};
+
 void Graph::addEdge(int v1, int v2){
     //validation
     if(v1 < 0 || v2 < 0 || v1 >= nOfVertices || v2 >= nOfVertices){
@@ -26,6 +31,7 @@ void Graph::addEdge(int v1, int v2){
     //adding edge
     matrix[v1][v2] = 1;
     matrix[v2][v1] = 1;
+    nOfEdges++;
 };
 
 void Graph::removeEdge(int v1, int v2){
@@ -37,6 +43,7 @@ void Graph::removeEdge(int v1, int v2){
     //removing edge
     matrix[v1][v2] = 0;
     matrix[v2][v1] = 0;
+    nOfEdges--;
 };
 
 bool Graph::edgeExist(int v1, int v2){

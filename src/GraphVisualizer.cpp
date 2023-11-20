@@ -27,7 +27,17 @@ void GraphVisualizer::showGraph(){
         vertices[i] = new Vertex(100, 100, i+1);
     }
     //edges
-    //TODO
+    int nOfEdges = g.getNoEdges();
+    Edge** edges = (Edge**)calloc(nOfEdges, sizeof(Edge*));
+    int counter = 0;
+    for(int i=0;i<nOfVertices;i++){
+        for(int j=i;j<nOfVertices;j++){
+            if(g.edgeExist(i, j)){
+                edges[counter] = new Edge(vertices[i], vertices[j]);
+                counter++;
+            }
+        }
+    }
 
 
     //creating variable which is storing id of vertex to move
@@ -36,24 +46,32 @@ void GraphVisualizer::showGraph(){
     //mouse position
     int mouseX = sf::Mouse::getPosition(*window).x;
     int mouseY = sf::Mouse::getPosition(*window).y;
-
+    
     //main loop
     while(window->isOpen()){
         //get mouse position
         mouseX = sf::Mouse::getPosition(*window).x;
         mouseY = sf::Mouse::getPosition(*window).y;
 
-
         //background color
         window->clear(sf::Color::White);
+
+        //update and display edges
+        for(int i=0;i<nOfEdges;i++){
+            edges[i]->updatePosition();
+            edges[i]->addToWindow(window);
+        }
 
         //display vertices
         for(int i=0;i<nOfVertices;i++){
             vertices[i]->addToWindow(window);
         }
 
+        
+
         //display window
         window->display();
+        
 
         //event handling
         while(window->pollEvent(event)) {
