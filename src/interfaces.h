@@ -12,6 +12,17 @@ struct Action{
     char id;
     char variable;
     char* dependencies;
+    int nOfDependencies;
+};
+
+struct Pair{
+    char e1;
+    char e2;
+};
+
+struct Relations{
+    Pair* tab;
+    int length;
 };
 
 
@@ -91,6 +102,20 @@ class InputParser{
         ~InputParser();
         void parse(std::string line);
         int getNoActions();
+        Action getAction(int id);
+};
+
+class Solver{
+    private:
+        InputParser ip;
+        std::string word;
+    public:
+        Solver();
+        Solver(InputParser ip, std::string word);
+        ~Solver();
+        Relations* createDependencies();
+        Relations* createIndependecies();
+        Graph* createGraph();
 
 };
 

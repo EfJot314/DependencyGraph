@@ -21,6 +21,7 @@ void InputParser::parse(std::string line){
     a.id = newLine[0];
     a.variable = newLine[1];
     a.dependencies = (char*)calloc(newLine.length()-2, sizeof(char));
+    a.nOfDependencies = newLine.length()-2;
     for(int i=2;i<newLine.length();i++){
         a.dependencies[i-2] = newLine[i];
     }
@@ -32,3 +33,8 @@ void InputParser::parse(std::string line){
 int InputParser::getNoActions(){
     return n;
 };
+
+Action InputParser::getAction(int id){
+    return actions[id];
+}
+

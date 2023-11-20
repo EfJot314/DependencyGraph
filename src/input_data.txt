@@ -1,4 +1,5 @@
-A: x = y + 5
-B: y = y + 5
-C: a = x + y
-D: y = x + a
+baadcb
+a: a = x + y
+b: y = y + 2z
+c: x = 3x + z
+d: z = y - z
