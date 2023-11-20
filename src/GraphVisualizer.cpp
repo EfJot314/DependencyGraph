@@ -11,20 +11,24 @@ GraphVisualizer::~GraphVisualizer(){};
 void GraphVisualizer::showGraph(){
 
     //creating window
-    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "Graph");
+    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(900, 700, 32), "Graph", sf::Style::Titlebar | sf::Style::Close);
     //variable for handling events
     sf::Event event;
 
     //loading font
     sf::Font font;
     font.loadFromFile("SFML/myFont.ttf");
+    sf::Text info("You can move graph vertices using mouse!", font, 20);
+    info.setPosition(window->getSize().x/2 - info.getLocalBounds().width/2, 5);
+    info.setFillColor(sf::Color::Black);
+
 
     //creating objects to display
     //vertices
     int nOfVertices = g.getNoVertices();
     Vertex** vertices = (Vertex**)calloc(nOfVertices, sizeof(Vertex*));
     for(int i=0;i<nOfVertices;i++){
-        vertices[i] = new Vertex(100, 100, i+1);
+        vertices[i] = new Vertex(window->getSize().x/2, window->getSize().y/2, i+1);
     }
     //edges
     int nOfEdges = g.getNoEdges();
@@ -67,7 +71,8 @@ void GraphVisualizer::showGraph(){
             vertices[i]->addToWindow(window);
         }
 
-        
+        //display info text
+        window->draw(info);
 
         //display window
         window->display();
