@@ -7,8 +7,8 @@ Edge::Edge(Vertex* v1, Vertex* v2){
     this->v1 = v1;
     this->v2 = v2;
     line = new sf::VertexArray(sf::PrimitiveType::Lines, 2);
-    (*line)[0].color = sf::Color::Black;
-    (*line)[1].color = sf::Color::Black;
+    (*line)[0].color = sf::Color::Green;
+    (*line)[1].color = sf::Color::Red;
     updatePosition();
 };
 

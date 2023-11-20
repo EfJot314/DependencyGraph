@@ -32,7 +32,7 @@ void Graph::addEdge(int v1, int v2){
 
     //adding edge
     matrix[v1][v2] = 1;
-    matrix[v2][v1] = 1;
+    // matrix[v2][v1] = 1;
     nOfEdges++;
 };
 
@@ -44,7 +44,7 @@ void Graph::removeEdge(int v1, int v2){
 
     //removing edge
     matrix[v1][v2] = 0;
-    matrix[v2][v1] = 0;
+    // matrix[v2][v1] = 0;
     nOfEdges--;
 };
 

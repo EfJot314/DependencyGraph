@@ -1,6 +1,31 @@
 #include "interfaces.h"
 
 
+
+
+//this function works only on graphs without any cycles
+//returns a maximum number of edges which can be used to get from v1 to v2
+int dfs(int v1, int v2, int value, Graph* g){
+    //end condition
+    if(v1 == v2) 
+        return value;
+    //if edge between v1 and i exist...
+    int toReturn = -1;
+    for(int i=0;i<g->getNoVertices();i++){
+        if(g->edgeExist(v1, i)){
+            //...then check if it is longer way to v2, than other ways
+            int var = dfs(i, v2, value+1, g);
+            if(var > toReturn)
+                toReturn = var;
+        }
+    }
+    //return
+    return toReturn;
+}
+
+
+
+
 Solver::Solver(){};
 
 Solver::Solver(InputParser ip, std::string word){
@@ -103,14 +128,12 @@ Relations* Solver::createIndependecies(){
 Graph* Solver::createGraph(Relations* D){
     Graph* g = new Graph(word.length());
     //for every letter in word...
-    int counter = 0;
     for(int i=0;i<word.length();i++){
         char c = word[i];
         //...search for action which has id equal to c
         for(int j=0;j<ip.getNoActions();j++){
             if(ip.getAction(j).id == c){
                 g->setVertexName(i, c);
-                counter++;
                 //search for edges
                 for(int z=0;z<i;z++){
                     //add edge only then, when it is in dependency array
@@ -124,5 +147,22 @@ Graph* Solver::createGraph(Relations* D){
             }
         }
     }
+    //remove duplicated edges
+    for(int i=0;i<word.length();i++){
+        for(int j=0;j<word.length();j++){
+            //if edge between i and j exist, then check if is duplicated or not
+            if(g->edgeExist(i, j)){
+                //if exist longer way from i to j, then delete this edge
+                if(dfs(i, j, 0, g) > 1){
+                    g->removeEdge(i, j);
+                }
+            }
+        }
+    }
+
+
+    //return result
     return g;
 };
+
+
