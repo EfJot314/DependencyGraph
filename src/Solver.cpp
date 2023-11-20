@@ -160,9 +160,82 @@ Graph* Solver::createGraph(Relations* D){
         }
     }
 
-
     //return result
     return g;
+};
+
+
+std::string Solver::createFNF(Graph* g){
+    //variable to return
+    std::string fnf = "";
+    int n = g->getNoVertices();
+
+    int counter = 0;
+    int* used = (int*)calloc(n, sizeof(int));
+
+    int newCounter = 0;
+    int* newUsed = (int*)calloc(n, sizeof(int));
+
+    while(true){
+        fnf += "(";
+        for(int i=0;i<n;i++){
+            //if haven't used already
+            bool flag = true;
+            for(int j=0;j<counter;j++){
+                if(used[j] == i){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                //check if exist edge which connects j to i
+                for(int j=0;j<n;j++){
+                    if(g->edgeExist(j, i)){
+                        //if exist, then check if j was used already
+                        flag = false;
+                        for(int z=0;z<counter;z++){
+                            //if used, then everything is ok, if not, then I cannot add it to fnf in this "turn"
+                            if(used[z] == j){
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if(!flag)
+                            break;
+                    }
+                }
+                //if not exist, then add to fnf and to newUsed (used in this "turn")
+                if(flag){
+                    fnf += g->getName(i);
+                    newUsed[newCounter] = i;
+                    newCounter++;
+                }
+            }
+            
+        }
+        //move all used in this () from newUsed to used
+        for(int i=0;i<newCounter;i++){
+            used[counter] = newUsed[i];
+            counter++;
+        }
+        newCounter = 0;
+
+        fnf += ")";
+
+        //end condition -> nothing added to fnf
+        if(fnf[fnf.length()-2] == '('){
+            //remove last 2 chars -> ()
+            fnf = fnf.substr(0, fnf.length()-2);
+            break;
+        }        
+    }
+
+    //free memory
+    free(used);
+    free(newUsed);
+
+    //return
+    return fnf;
 };
 
 

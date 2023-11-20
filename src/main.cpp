@@ -55,7 +55,12 @@ int main()
     //create graph
     Graph* g = s.createGraph(D);
 
-    //graph visualization
+    //show FNF(w)
+    std::string fnf = s.createFNF(g);
+    cout << "FNF(w) = " << fnf << endl;
+
+
+    //show graph
     GraphVisualizer gv(*g);
     gv.showGraph();
 

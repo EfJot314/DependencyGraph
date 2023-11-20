@@ -27,7 +27,6 @@ struct Relations{
 };
 
 
-
 class Graph{
     private:
         int** matrix;
@@ -116,7 +115,7 @@ class Solver{
         Relations* createDependencies();
         Relations* createIndependecies();
         Graph* createGraph(Relations* D);
-
+        std::string createFNF(Graph* g);
 };
 
 
