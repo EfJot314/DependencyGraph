@@ -2,11 +2,11 @@
 
 Vertex::Vertex(){};
 
-Vertex::Vertex(int id){
+Vertex::Vertex(std::string id){
     Vertex(0, 0, id);
 }
 
-Vertex::Vertex(int x, int y, int id){
+Vertex::Vertex(int x, int y, std::string id){
     this->id = id;
     setPosition(x, y);
     r = 30.0f;
@@ -19,7 +19,7 @@ Vertex::Vertex(int x, int y, int id){
     font.loadFromFile("SFML/myFont.ttf");
 
     //creating text object
-    text = new sf::Text(std::to_string(id), font, 30);
+    text = new sf::Text(id, font, 30);
     text->setStyle(sf::Text::Bold);
     text->setFillColor(sf::Color::White);
 }
@@ -48,7 +48,7 @@ int Vertex::getPositionY(){
     return y;
 };
 
-int Vertex::getId(){
+std::string Vertex::getId(){
     return id;
 };
 

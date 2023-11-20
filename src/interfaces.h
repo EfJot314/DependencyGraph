@@ -1,13 +1,25 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <fstream>
 #include <unistd.h>
 #include <cstdlib>
 #include <math.h>
+
+#include "constants.h"
+
+
+struct Action{
+    char id;
+    char variable;
+    char* dependencies;
+};
+
 
 
 class Graph{
     private:
         int** matrix;
+        std::string* names;
         int nOfVertices;
         int nOfEdges;
     public:
@@ -19,25 +31,28 @@ class Graph{
         void addEdge(int v1, int v2);
         void removeEdge(int v1, int v2);
         bool edgeExist(int v1, int v2);
+        void setVertexName(int id, std::string name);
+        std::string getName(int id);
+
 };
 
 class Vertex{
     private:
         int x;
         int y;
-        int id;
+        std::string id;
         float r;
         sf::CircleShape* circle;
         sf::Font font;
         sf::Text* text;
     public:
         Vertex();
-        Vertex(int id);
-        Vertex(int x, int y, int id);
+        Vertex(std::string id);
+        Vertex(int x, int y, std::string id);
         ~Vertex();
         void addToWindow(sf::RenderWindow* window);
         void setPosition(int x, int y);
-        int getId();
+        std::string getId();
         int getPositionX();
         int getPositionY();
         bool isOverVertex(int xi, int yi);
@@ -70,11 +85,12 @@ class GraphVisualizer{
 class InputParser{
     private:
         int n;
+        Action* actions;
     public:
         InputParser();
-        InputParser(int n);
         ~InputParser();
         void parse(std::string line);
+        int getNoActions();
 
 };
 

@@ -28,7 +28,7 @@ void GraphVisualizer::showGraph(){
     int nOfVertices = g.getNoVertices();
     Vertex** vertices = (Vertex**)calloc(nOfVertices, sizeof(Vertex*));
     for(int i=0;i<nOfVertices;i++){
-        vertices[i] = new Vertex(window->getSize().x/2, window->getSize().y/2, i+1);
+        vertices[i] = new Vertex(window->getSize().x/2, window->getSize().y/2, g.getName(i));
     }
     //edges
     int nOfEdges = g.getNoEdges();
