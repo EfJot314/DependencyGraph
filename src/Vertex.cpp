@@ -16,7 +16,7 @@ Vertex::Vertex(int x, int y, std::string id){
     circle->setFillColor(sf::Color::Black);
 
     //loading font
-    font.loadFromFile("SFML/myFont.ttf");
+    font.loadFromFile(fontFilePath);
 
     //creating text object
     text = new sf::Text(id, font, 30);

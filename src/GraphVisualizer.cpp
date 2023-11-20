@@ -17,7 +17,7 @@ void GraphVisualizer::showGraph(){
 
     //loading font
     sf::Font font;
-    font.loadFromFile("SFML/myFont.ttf");
+    font.loadFromFile(fontFilePath);
     sf::Text info("You can move graph vertices using mouse!", font, 20);
     info.setPosition(window->getSize().x/2 - info.getLocalBounds().width/2, 5);
     info.setFillColor(sf::Color::Black);

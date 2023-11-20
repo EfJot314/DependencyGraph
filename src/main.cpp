@@ -4,10 +4,6 @@ using namespace std;
 
 int main()
 {
-    //for random numbers
-    srand((unsigned) time(NULL));
-
-
     //read data file
     ifstream file(dataFilePath);
     if (!file.is_open()) {
@@ -68,6 +64,6 @@ int main()
     g->freeMemory();
     ip.freeMemory();
 
-    
+
     return 0;
 }
